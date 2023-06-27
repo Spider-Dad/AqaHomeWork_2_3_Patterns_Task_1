@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/m42gntvyxdia7ti6/branch/main?svg=true)](https://ci.appveyor.com/project/Spider-Dad/aqahomework-2-3-patterns-task-1/branch/main)

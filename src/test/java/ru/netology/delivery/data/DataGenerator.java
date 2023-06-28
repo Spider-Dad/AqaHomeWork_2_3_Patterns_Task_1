@@ -6,6 +6,8 @@ import lombok.val;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class DataGenerator {
@@ -23,14 +25,16 @@ public class DataGenerator {
         // TODO: добавить логику для объявления переменной city и задания её значения, генерацию можно выполнить
         // с помощью Faker, либо используя массив валидных городов и класс Random
         Faker faker = new Faker(new Locale(locale));
-        return faker.address().city();
+        final List<String> cities = Arrays.asList("Санкт-Петербург", "Москва", "Казань", "Омск", "Новосибирск", "Липецк", "Тамбов");
+        return cities.get(faker.random().nextInt(cities.size()));
+
     }
 
     public static String generateName(String locale) {
         // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
         // использовать Faker
         Faker faker = new Faker(new Locale(locale));
-        return faker.name().lastName();
+        return faker.name().fullName();
     }
 
     public static String generatePhone(String locale) {

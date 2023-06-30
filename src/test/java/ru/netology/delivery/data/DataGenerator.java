@@ -9,39 +9,34 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class DataGenerator {
     private DataGenerator() {
     }
 
-    public static String generateDate(int shift) {
-        // TODO: добавить логику для объявления переменной date и задания её значения, для генерации строки с датой
-        // Вы можете использовать класс LocalDate и его методы для получения и форматирования даты
-        val date = LocalDate.now().plusDays(shift);
+    public static String generateDate(int addDays) {
+        val date = LocalDate.now().plusDays(addDays);
         return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    public static String generateCity(String locale) {
-        // TODO: добавить логику для объявления переменной city и задания её значения, генерацию можно выполнить
-        // с помощью Faker, либо используя массив валидных городов и класс Random
-        Faker faker = new Faker(new Locale(locale));
+    public static String generateCity() {
         final List<String> cities = Arrays.asList("Санкт-Петербург", "Москва", "Казань", "Омск", "Новосибирск", "Липецк", "Тамбов");
-        return cities.get(faker.random().nextInt(cities.size()));
+        Random random = new Random();
+        int randomIndex = random.nextInt(cities.size());
+        return cities.get(randomIndex);
 
     }
 
     public static String generateName(String locale) {
-        // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
-        // использовать Faker
         Faker faker = new Faker(new Locale(locale));
-        return faker.name().fullName();
+        String lastName = faker.name().lastName();
+        String firstName = faker.name().firstName();
+        return lastName + " " + firstName;
     }
 
     public static String generatePhone(String locale) {
-        // TODO: добавить логику для объявления переменной phone и задания её значения, для генерации можно
-        // использовать Faker
         Faker faker = new Faker(new Locale(locale));
-        //return faker.phoneNumber().phoneNumber();
         return faker.phoneNumber().phoneNumber().replaceAll("[^0-9]+", "").replaceFirst("(\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5");
     }
 
@@ -50,9 +45,7 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            // TODO: добавить логику для создания пользователя user с использованием методов generateCity(locale),
-            // generateName(locale), generatePhone(locale)
-            val city = generateCity(locale);
+            val city = generateCity();
             val name = generateName(locale);
             val phone = generatePhone(locale);
             return new UserInfo(city, name, phone);

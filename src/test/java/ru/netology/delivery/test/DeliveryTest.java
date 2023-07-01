@@ -1,6 +1,5 @@
 package ru.netology.delivery.test;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,16 +39,16 @@ class DeliveryTest {
         $(byText("Запланировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(10));
 
-        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + firstMeetingDate)).shouldBe(visible);
+        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + firstMeetingDate)).shouldBe(visible, Duration.ofSeconds(10));
 
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(secondMeetingDate);
         $(byText("Запланировать")).click();
 
-        $("[data-test-id=replan-notification]").shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?")).shouldBe(visible);
+        $("[data-test-id=replan-notification]").shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?")).shouldBe(visible, Duration.ofSeconds(10));
         $("[data-test-id=replan-notification] button").click();
 
-        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + secondMeetingDate)).shouldBe(visible);
+        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + secondMeetingDate)).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     @Test
@@ -69,9 +68,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Доставка в выбранный город недоступна";
-        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=city].input_invalid .input__sub").getText().trim());
+        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text("Доставка в выбранный город недоступна")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     @Test
@@ -90,9 +87,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Доставка в выбранный город недоступна";
-        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=city].input_invalid .input__sub").getText().trim());
+        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text("Доставка в выбранный город недоступна")).shouldBe(visible, Duration.ofSeconds(10));
 
     }
 
@@ -110,9 +105,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Поле обязательно для заполнения";
-        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=city].input_invalid .input__sub").getText().trim());
+        $("[data-test-id=city].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
     @Test
@@ -130,9 +123,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Заказ на выбранную дату невозможен";
-        $("[data-test-id=date] .input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=date] .input_invalid .input__sub").getText().trim());
+        $("[data-test-id=date] .input_invalid .input__sub").shouldHave(text("Заказ на выбранную дату невозможен")).shouldBe(visible, Duration.ofSeconds(10));
 
     }
 
@@ -149,9 +140,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Неверно введена дата";
-        $("[data-test-id=date] .input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=date] .input_invalid .input__sub").getText().trim());
+        $("[data-test-id=date] .input_invalid .input__sub").shouldHave(text("Неверно введена дата")).shouldBe(visible, Duration.ofSeconds(10));
 
     }
 
@@ -169,9 +158,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Поле обязательно для заполнения";
-        $("[data-test-id=phone].input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=phone].input_invalid .input__sub").getText().trim());
+        $("[data-test-id=phone].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     @Test
@@ -188,10 +175,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Поле обязательно для заполнения";
-        $("[data-test-id=name].input_invalid .input__sub").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=name].input_invalid .input__sub").getText().trim());
-
+        $("[data-test-id=name].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     @Test
@@ -205,10 +189,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $(byText("Запланировать")).click();
 
-        String errorMessage = "Неверно введена дата";
-        $("[data-test-id=date] .input_invalid").shouldHave(text(errorMessage));
-        Assertions.assertEquals(errorMessage, $("[data-test-id=date] .input_invalid").getText().trim());
-
+        $("[data-test-id=date] .input_invalid").shouldHave(text("Неверно введена дата")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
     @Test
@@ -225,7 +206,7 @@ class DeliveryTest {
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         $(byText("Запланировать")).click();
 
-        Assertions.assertTrue($("[data-test-id=agreement].input_invalid .checkbox__box").isDisplayed());
+        $("[data-test-id=agreement].input_invalid .checkbox__text").shouldHave(text("Я соглашаюсь с условиями обработки и использования моих персональных данных")).shouldBe(visible, Duration.ofSeconds(10));
 
     }
 }
